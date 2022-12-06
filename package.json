@@ -1,0 +1,32 @@
+{
+    "name": "markdown-ppt",
+    "version": "1.0.0",
+    "description": "",
+    "repository": "im/markdown-ppt",
+    "main": "dist/markdown-ppt.min.js",
+    "unpkg": "dist/markdown-ppt.min.js",
+    "license": "MIT",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "prestart": "rm -rf dist",
+        "start": "nodemon -w src -e js,ts -x 'npm run build'",
+        "build": "esbuild src/index.ts --outfile=dist/markdown-ppt.min.js --bundle --minify --sourcemap --format=iife",
+        "build-ppt": "rm -rf public && mkdir public && cp -R dist public && cp *.html deck.* public",
+        "prepack": "npm run build"
+    },
+    "keywords": [
+        "markdown",
+        "ppt"
+    ],
+    "author": "tangxiaomi",
+    "dependencies": {
+        "marked": "^2.0.0",
+        "prismjs": "^1.22.0"
+    },
+    "devDependencies": {
+        "@tangxiaomi/eslint-config": "^0.0.3",
+        "esbuild": "^0.12.14",
+        "nodemon": "^2.0.5",
+        "typescript": "^4.1.5"
+    }
+}
