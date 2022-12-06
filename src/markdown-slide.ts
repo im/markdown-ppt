@@ -21,34 +21,34 @@ const ORIGINAL_HEIGHT = orientPortrait ? 1280 : 800
 
 @customElement('markdown-slide')
 export class MarkdownSlide extends LitElement {
-  @property({ type: String }) markdown: string
-  @property({ type: Boolean }) invert: boolean
-  @property({ type: String }) css: string
+    @property({ type: String }) markdown: string
+    @property({ type: Boolean }) invert: boolean
+    @property({ type: String }) css: string
 
-  @property({ type: Number }) _scale: number
+    @property({ type: Number }) _scale: number
 
-  static get styles () {
-    return slideStyle(themeDefault, themeCodeDefault)
-  }
-
-  render () {
-    const markup = marked(this.markdown, {
-      highlight: function (code: string, lang: string) {
-        try {
-          return Prism.highlight(code, Prism.languages[lang || 'markup'])
-        } catch (e) {
-          console.warn(`[highlight error] lang:${lang} index:${this.index}`)
-          return code
-        }
-      }
-    })
-
-    const classNames = {
-      slide: true,
-      invert: this.invert
+    static get styles () {
+        return slideStyle(themeDefault, themeCodeDefault)
     }
 
-    return html`
+    render () {
+        const markup = marked(this.markdown, {
+            highlight: function (code: string, lang: string) {
+                try {
+                    return Prism.highlight(code, Prism.languages[lang || 'markup'])
+                } catch (e) {
+                    console.warn(`[highlight error] lang:${lang} index:${this.index}`)
+                    return code
+                }
+            }
+        })
+
+        const classNames = {
+            slide: true,
+            invert: this.invert
+        }
+
+        return html`
       <div class=${classMap(classNames)}>
         <style>
           .slide { background-color: white }
@@ -58,38 +58,38 @@ export class MarkdownSlide extends LitElement {
         <section class="content">${unsafeHTML(markup)}</section>
       </div>
     `
-  }
+    }
 
-  firstUpdated () {
-    const elem = this.shadowRoot.querySelector('.slide')
-    observeResize(elem, this._setScale)
-  }
+    firstUpdated () {
+        const elem = this.shadowRoot.querySelector('.slide')
+        observeResize(elem, this._setScale)
+    }
 
-  updated () {
-    this._setScale()
-  }
+    updated () {
+        this._setScale()
+    }
 
-  _setScale = () => {
-    const { width, height } = this.getBoundingClientRect()
-    const maxScale = Math.min(width / ORIGINAL_WIDTH, height / ORIGINAL_HEIGHT)
-    this._scale = maxScale * 0.9
-  }
+    _setScale = () => {
+        const { width, height } = this.getBoundingClientRect()
+        const maxScale = Math.min(width / ORIGINAL_WIDTH, height / ORIGINAL_HEIGHT)
+        this._scale = maxScale * 0.9
+    }
 }
 
 declare global {
-  interface Window {
-    ResizeObserver: any;
-  }
+    interface Window {
+        ResizeObserver: any;
+    }
 }
 
-function observeResize (elem: Element, cb: Function) {
-  if (window.ResizeObserver) {
-    new window.ResizeObserver(cb).observe(elem)
-  }
+function observeResize (elem: Element, cb: any) {
+    if (window.ResizeObserver) {
+        new window.ResizeObserver(cb).observe(elem)
+    }
 }
 
 function slideStyle (theme: CSSResult, codeTheme: CSSResult): CSSResult {
-  return css`
+    return css`
     .slide {
       height: 100%;
       width: 100%;
