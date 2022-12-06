@@ -87,7 +87,7 @@
 
 <style>
 .slide {
-  background: url(/bg.jpeg) center;
+  background: url(./bg.jpeg) center;
   background-size: cover;
 }
 .content { filter: invert() }
