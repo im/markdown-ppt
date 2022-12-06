@@ -49,11 +49,11 @@ export class MarkdownChart extends LitElement {
                 optionsStr = arr[0] || ''
 
                 try {
-                    const callbackStr = arr[1] || ''
-                    const cb = eval('(' + callbackStr + ')')
+                    // const callbackStr = arr[1] || ''
+                    // const cb = eval('(' + callbackStr + ')')
                     // const cb = new Function(callbackStr)
 
-                    cb && cb(this.myChart, this.shadowRoot)
+                    // cb && cb(this.myChart, this.shadowRoot)
                     // console.log('this.shadowRoot: ', this.shadowRoot)
                     // this.shadowRoot.myChart = this.myChart
 
