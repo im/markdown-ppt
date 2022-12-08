@@ -66,7 +66,8 @@ export class MarkdownChart extends LitElement {
                     console.log('cb: ', e)
                 }
             }
-            const options = eval('(' + optionsStr + ')')
+
+            const options = new Function('', `return` + '(' + optionsStr + ')')()
             this.myChart.setOption(options)
 
         } catch (err) {
