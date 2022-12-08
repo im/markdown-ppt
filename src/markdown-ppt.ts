@@ -8,6 +8,7 @@ import interItalicFontCSS from './fonts/inter.italic.css'
 
 import './markdown-slide'
 import './markdown-chart'
+import './markdown-draw'
 
 @customElement('markdown-ppt')
 export class MarkdownPpt extends LitElement {
